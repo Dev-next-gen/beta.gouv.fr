@@ -141,6 +141,8 @@ $(() => {
     "Design",
     "Produit",
     "Data",
+    "Support",
+    "Attributaire",
     "Autre",
   ];
   const domaineKeys = Object.keys(window.data.domaine).sort(
@@ -168,6 +170,9 @@ $(() => {
             "#F4DEA8", // product
 
             "#FFB6A3", // data
+
+            "#C9A9E6", // support
+            "#B5838D", // attributaire
 
             "#D9D9D9",
           ], // autre
