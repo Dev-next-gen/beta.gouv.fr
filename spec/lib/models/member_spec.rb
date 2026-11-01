@@ -93,5 +93,19 @@ YAML
         expect(member.legacy_startups).to contain_exactly('bat', 'man')
       end
     end
+
+    context 'when the member is back on a startup after an inactive mission' do
+      before do
+        data['missions'] << {
+          'start' => Date.new(2020, 1, 1),
+          'end' => Date.new(2021, 1, 1),
+          'startups' => ['aplypro']
+        }
+      end
+
+      it 'is not included in the legacy_startups' do
+        expect(member.legacy_startups).not_to include 'aplypro'
+      end
+    end
   end
 end

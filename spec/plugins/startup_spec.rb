@@ -47,12 +47,23 @@ YAML
     context 'when asking for alumni members' do
       subject(:alumni_members) { template.members([member], 'notifications', true) }
 
+      before { data.delete('startups') }
+
       context 'and the member has an inactive mission containing the startup' do
         before do
           data['missions'].first['end'] = Date.parse('2000-01-01')
         end
 
         it { is_expected.to contain_exactly member }
+      end
+
+      context 'and the member is back on the startup after an inactive mission' do
+        before do
+          data['missions'].first['end'] = Date.parse('2000-01-01')
+          data['missions'] << { 'startups' => ['notifications'], 'end' => Date.today.next_year }
+        end
+
+        it { is_expected.to be_empty }
       end
 
       context 'and the member has a legacy startup' do

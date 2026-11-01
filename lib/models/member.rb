@@ -37,7 +37,7 @@ module Beta
       (
         previously +
         legacy_missions.map { |mission| mission['startups'] }.flatten
-      ).uniq
+      ).uniq - active_startups
     end
 
     def all_startups
