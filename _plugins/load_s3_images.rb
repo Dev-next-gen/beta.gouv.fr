@@ -16,7 +16,7 @@ Jekyll::Hooks.register :site, :after_init do |site|
 
   Jekyll.logger.info 'Fetching S3 assets...'
 
-  site.config['s3_keys'] = client.list_objects(bucket: 'espace-membre').contents.map(&:key)
+  site.config['s3_keys'] = client.list_objects(bucket: 'espace-membre').flat_map { |page| page.contents.map(&:key) }
 
   Jekyll.logger.info "Saved #{site.config['s3_keys'].length} S3 keys into the site config."
 end
