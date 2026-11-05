@@ -37,6 +37,25 @@ YAML
     it 'uses the start date to figure out the active phase' do
       expect(startup.latest_phase['name']).to eq 'construction'
     end
+
+    context 'when two phases start on the same day' do
+      let(:yml) do
+        <<YAML
+  id: tartines
+  title: Tartines
+  incubator: dinum
+  phases:
+    - name: investigation
+      start: 2025-07-29
+    - name: construction
+      start: 2025-07-29
+YAML
+      end
+
+      it 'picks the later phase of the lifecycle' do
+        expect(startup.latest_phase['name']).to eq 'construction'
+      end
+    end
   end
 
   describe 'incubators' do

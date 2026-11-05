@@ -41,7 +41,7 @@ module Beta
 
     def latest_phase
       phases
-        .max_by { |phase| phase['start'] }
+        .max_by { |phase| [phase['start'], PHASES.index(phase['name']) || -1] }
     end
 
     def active?
